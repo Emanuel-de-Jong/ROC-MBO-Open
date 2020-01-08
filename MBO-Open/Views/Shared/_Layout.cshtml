@@ -14,7 +14,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.js"></script>
 </head>
-<body>
+<body onload="pageLoaded()">
     <nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-md navigation-clean-button">
         <img src="~/Content/Images/knltb-logo.png" alt="knltb-logo" style="width: 100px;" />
         <div class="container">
@@ -54,9 +54,10 @@
                                 {
                                     <label class="dropdown-item" for="file" style="margin-bottom:0;">Importeren</label>
                                     <input type="file" accept=".xml" hidden id="file" name="file" />
+                                    <input type="hidden" value='@Request.Url.AbsoluteUri' name="prevURL" />
                                 }
                                 <a class="dropdown-item" href="@Url.Action("Index", "Sluiten")">Sluiten</a>
-                                </div>
+                            </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -85,6 +86,12 @@
     @RenderSection("scripts", required: false)
 
     <script>
+        function pageLoaded() {
+            if ('@ViewBag.message' != "") {
+                alert('@ViewBag.message');
+            }
+        }
+
         $(document).ready(function () {
             $('#file').change(function () {
                 $("#importForm").submit();
