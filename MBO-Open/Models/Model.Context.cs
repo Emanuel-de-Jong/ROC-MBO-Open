@@ -137,5 +137,14 @@ namespace MBO_Open.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
+    
+        public virtual ObjectResult<Nullable<int>> FindScholenIDWithNaam(string naam)
+        {
+            var naamParameter = naam != null ?
+                new ObjectParameter("Naam", naam) :
+                new ObjectParameter("Naam", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("FindScholenIDWithNaam", naamParameter);
+        }
     }
 }

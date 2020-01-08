@@ -173,6 +173,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImporterenController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SluitenController.cs" />
     <Compile Include="Controllers\SpelersController.cs" />
@@ -419,6 +420,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Importeren\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

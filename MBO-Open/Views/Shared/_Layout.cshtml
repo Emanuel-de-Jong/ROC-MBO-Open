@@ -50,7 +50,8 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="@Url.Action("Index", "Handmatig")">Handmatig</a>
-                                <a class="dropdown-item" href="@Url.Action("Index", "Importeren")">Importeren</a>
+                                <label class="dropdown-item" for="importeren" style="margin-bottom:0;">Importeren</label>
+                                <input type="file" accept=".xml" hidden id="importeren" />
                                 <a class="dropdown-item" href="@Url.Action("Index", "Sluiten")">Sluiten</a>
                             </div>
                         </li>
@@ -82,6 +83,11 @@
 
     <script>
         $(document).ready(function () {
+            $("#importeren").change(function () {
+                var file = $("#importeren").prop("files")[0];
+                @Url.Action("ManageFile", "Importeren", new { file = file });
+            });
+
             $('.project-table').DataTable({
                 dom: 'Bfrtlip',
                 searching: true,
