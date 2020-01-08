@@ -87,8 +87,9 @@
 
     <script>
         function pageLoaded() {
-            if ('@ViewBag.message' != "") {
-                alert('@ViewBag.message');
+            if ('@Session["message"]' != "") {
+                alert('@Session["message"]');
+                window.location = '@Url.Action("ClearMessage", "Message", new { prevURL = Request.Url.AbsoluteUri })';
             }
         }
 

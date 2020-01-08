@@ -15,9 +15,8 @@ namespace MBO_Open.Controllers
         private MBOOpenEntities db = new MBOOpenEntities();
 
         // GET: Scholen
-        public ActionResult Index(string message="")
+        public ActionResult Index()
         {
-            ViewBag.message = message;
             return View(db.Scholens.ToList());
         }
 
@@ -55,8 +54,6 @@ namespace MBO_Open.Controllers
         // GET: Scholen/Delete/5
         public ActionResult Delete(int? id)
         {
-            var message = "";
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -71,14 +68,14 @@ namespace MBO_Open.Controllers
             {
                 db.Scholens.Remove(scholen);
                 db.SaveChanges();
-                message = "De school is succesvol verwijdert.";
+                Session["message"] = "De school is succesvol verwijdert.";
             }
             else
             {
-                message = "De school heeft spelers dus kan niet verwijdert worden.";
+                Session["message"] = "De school heeft spelers dus kan niet verwijdert worden.";
             }
 
-            return RedirectToAction("Index", new { message = message });
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

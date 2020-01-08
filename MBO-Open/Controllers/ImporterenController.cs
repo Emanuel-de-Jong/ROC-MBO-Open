@@ -16,20 +16,18 @@ namespace MBO_Open.Controllers
     {
         private MBOOpenEntities db = new MBOOpenEntities();
 
-        public ActionResult ManageFile(HttpPostedFileBase file, string prevController, string prevMethod)
+        public ActionResult ManageFile(HttpPostedFileBase file, string prevURL)
         {
-            string message = "";
-
             if (!file.FileName.ToLower().EndsWith(".xml"))
             {
-                message = "Het bestand is geen xml";
+                Session["message"] = "Het bestand is geen xml";
                 return Redirect(prevURL);
             }
 
             //ImportXml(file);
 
-            message = "Het xml bestand is succesvol geimporteerd";
-            return Redirect(prevURL + );
+            Session["message"] = "Het xml bestand is succesvol geimporteerd";
+            return Redirect(prevURL);
         }
 
         private void ImportXml(HttpPostedFileBase xml)

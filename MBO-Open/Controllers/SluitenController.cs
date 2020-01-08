@@ -15,9 +15,8 @@ namespace MBO_Open.Controllers
     {
         private MBOOpenEntities db = new MBOOpenEntities();
         // GET: Sluiten
-        public ActionResult Index(string message = "")
+        public ActionResult Index()
         {
-            ViewBag.message = message;
             return View();
         }
     }

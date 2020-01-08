@@ -15,9 +15,8 @@ namespace MBO_Open.Controllers
         private MBOOpenEntities db = new MBOOpenEntities();
 
         // GET: Spelers
-        public ActionResult Index(string message = "")
+        public ActionResult Index()
         {
-            ViewBag.message = message;
             var spelers = db.Spelers.Include(s => s.Scholen);
             return View(spelers.ToList());
         }
