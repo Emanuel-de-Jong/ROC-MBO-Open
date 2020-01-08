@@ -109,6 +109,7 @@ namespace MBO_Open.Controllers
             {
                 db.Scholens.Remove(scholen);
                 db.SaveChanges();
+                message = "De school is succesvol verwijdert.";
             }
             else
             {

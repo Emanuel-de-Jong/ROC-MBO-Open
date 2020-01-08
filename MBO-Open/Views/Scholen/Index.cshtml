@@ -6,55 +6,52 @@
 }
 <link href="~/Content/basisgegevens.css" rel="stylesheet" />
 
-
-<script>
-    function pageLoaded() {
-        if (@ViewBag.message != "") {
-            alert(@ViewBag.message);
+<body onload="pageLoaded()">
+    <script>
+        function pageLoaded() {
+            if ('@ViewBag.message' != "") {
+                alert('@ViewBag.message');
+            }
         }
-    }
+    </script>
 
-</script>
+    <h1>Scholen</h1>
 
-
-<h1>Scholen</h1>
-
-<div class="container" style="padding-top: 100px;">
-    <div class="card">
-        <div class="card-body">
-            <table class="table table-striped table-bordered responsive nowrap project-table" width="100%">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Naam)
-                        </th>
-                        <th>
-                            Wijzigen
-                        </th>
-                        <th>
-                            Verwijderen
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
+    <div class="container" style="padding-top: 100px;">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped table-bordered responsive nowrap project-table" width="100%">
+                    <thead>
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Naam)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Wijzig", "Edit", new { id = item.ID })
-                            </td>
-                            <td>
-                                @Html.ActionLink("Verwijder", "Delete", new { id = item.ID })
-                            </td>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Naam)
+                            </th>
+                            <th>
+                                Wijzigen
+                            </th>
+                            <th>
+                                Verwijderen
+                            </th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Naam)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Wijzig", "Edit", new { id = item.ID })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Verwijder", "Delete", new { id = item.ID })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-
-
+</body>
