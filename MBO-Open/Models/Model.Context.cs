@@ -29,12 +29,9 @@ namespace MBO_Open.Models
     
         public virtual DbSet<Aanmeldingen> Aanmeldingens { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Scholen> Scholens { get; set; }
         public virtual DbSet<Speler> Spelers { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Toernooien> Toernooiens { get; set; }
         public virtual DbSet<Wedstrijden> Wedstrijdens { get; set; }
     
