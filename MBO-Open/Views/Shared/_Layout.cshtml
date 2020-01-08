@@ -50,10 +50,13 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="@Url.Action("Index", "Handmatig")">Handmatig</a>
-                                <label class="dropdown-item" for="importeren" style="margin-bottom:0;">Importeren</label>
-                                <input type="file" accept=".xml" hidden id="importeren" />
+                                @using (Html.BeginForm("ManageFile", "Importeren", FormMethod.Post, new { enctype = "multipart/form-data", id = "importForm" }))
+                                {
+                                    <label class="dropdown-item" for="file" style="margin-bottom:0;">Importeren</label>
+                                    <input type="file" accept=".xml" hidden id="file" name="file" />
+                                }
                                 <a class="dropdown-item" href="@Url.Action("Index", "Sluiten")">Sluiten</a>
-                            </div>
+                                </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -83,9 +86,8 @@
 
     <script>
         $(document).ready(function () {
-            $("#importeren").change(function () {
-                var file = $("#importeren").prop("files")[0];
-                @Url.Action("ManageFile", "Importeren", new { file = file });
+            $('#file').change(function () {
+                $("#importForm").submit();
             });
 
             $('.project-table').DataTable({

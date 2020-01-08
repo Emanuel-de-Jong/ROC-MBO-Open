@@ -26,30 +26,27 @@ namespace MBO_Open.Controllers
                 return;
             }
 
-            var uploadsFolder = Server.MapPath("/Uploads");
-            var uploadsFileName = uploadsFolder + "/" + file.FileName;
-            file.SaveAs(uploadsFileName);
-            FileInfo fileInfo = new FileInfo(uploadsFileName);
-
-            ImportXml(fileInfo);
+            ImportXml(file);
 
             message = "Het xml bestand is succesvol geimporteerd";
             return;
         }
 
-        private void ImportXml(FileInfo xmlInfo)
+        private void ImportXml(HttpPostedFileBase xml)
         {
             XmlDocument spelers = new XmlDocument();
 
-            spelers.Load(xmlInfo.FullName);
+            spelers.Load(xml.InputStream);
             foreach (XmlNode node in spelers.DocumentElement)
             {
                 Speler newSpeler = new Speler();
+
+                List<Int32> schoolIDsWithName = db.FindScholenIDWithNaam(node.ChildNodes[2].InnerText).Select(i => i.GetValueOrDefault(0)).ToList();
                 if (node.Name.ToLower() == "aanmelding")
                 {
                     newSpeler.Voornaam = node.ChildNodes[0].InnerText;
                     newSpeler.Achternaam = node.ChildNodes[1].InnerText;
-                    newSpeler.SchoolID = Convert.ToInt32(db.FindScholenIDWithNaam(node.ChildNodes[2].InnerText));
+                    newSpeler.SchoolID = schoolIDsWithName[0];
                     newSpeler.Tussenvoegsels = node.ChildNodes[3].InnerText;
                 }
 
