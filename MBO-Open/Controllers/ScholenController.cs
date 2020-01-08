@@ -21,44 +21,6 @@ namespace MBO_Open.Controllers
             return View(db.Scholens.ToList());
         }
 
-        // GET: Scholen/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Scholen scholen = db.Scholens.Find(id);
-            if (scholen == null)
-            {
-                return HttpNotFound();
-            }
-            return View(scholen);
-        }
-
-        // GET: Scholen/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: Scholen/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "ID,Naam")] Scholen scholen)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Scholens.Add(scholen);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(scholen);
-        //}
-
         // GET: Scholen/Edit/5
         public ActionResult Edit(int? id)
         {
