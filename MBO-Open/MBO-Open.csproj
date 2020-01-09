@@ -172,60 +172,74 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HandmatigController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IndelenController.cs" />
     <Compile Include="Controllers\ImporterenController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
-    <Compile Include="Controllers\SluitenController.cs" />
+    <Compile Include="Controllers\ToernooienController.cs" />
     <Compile Include="Controllers\SpelersController.cs" />
     <Compile Include="Controllers\ScholenController.cs" />
+    <Compile Include="Controllers\UitslagenController.cs" />
+    <Compile Include="Controllers\ToernooioverzichtController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Aanmeldingen.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>MBO-Open.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>MBO-Open.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>MBO-Open.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>MBO-Open.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>MBO-Open.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HandmatigAanmeldenViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Model.Context.cs">
+    <Compile Include="Models\MBO-Open.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.Context.tt</DependentUpon>
+      <DependentUpon>MBO-Open.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model.cs">
+    <Compile Include="Models\MBO-Open.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>MBO-Open.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model.Designer.cs">
+    <Compile Include="Models\MBO-Open.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.edmx</DependentUpon>
+      <DependentUpon>MBO-Open.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Scholen.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>MBO-Open.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Speler.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>MBO-Open.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>MBO-Open.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>MBO-Open.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>MBO-Open.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Toernooien.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>MBO-Open.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Wedstrijden.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>MBO-Open.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -239,18 +253,19 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\knltb-logo.png" />
     <Content Include="Content\basisgegevens.css" />
+    <Content Include="Content\importeren.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Model.Context.tt">
+    <Content Include="Models\MBO-Open.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
+      <DependentUpon>MBO-Open.edmx</DependentUpon>
+      <LastGenOutput>MBO-Open.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Model.tt">
+    <Content Include="Models\MBO-Open.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.cs</LastGenOutput>
+      <DependentUpon>MBO-Open.edmx</DependentUpon>
+      <LastGenOutput>MBO-Open.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -275,12 +290,12 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <EntityDeploy Include="Models\Model.edmx">
+    <EntityDeploy Include="Models\MBO-Open.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+      <LastGenOutput>MBO-Open.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
+    <Content Include="Models\MBO-Open.edmx.diagram">
+      <DependentUpon>MBO-Open.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -408,20 +423,35 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Toernooien\Create.cshtml" />
+    <Content Include="Views\Toernooien\Delete.cshtml" />
+    <Content Include="Views\Toernooien\Details.cshtml" />
+    <Content Include="Views\Toernooien\Edit.cshtml" />
+    <Content Include="Views\Toernooien\Index.cshtml" />
+    <Content Include="Views\Handmatig\Create.cshtml" />
+    <Content Include="Views\Handmatig\Delete.cshtml" />
+    <Content Include="Views\Handmatig\Details.cshtml" />
+    <Content Include="Views\Handmatig\Edit.cshtml" />
+    <Content Include="Views\Handmatig\Index.cshtml" />
     <Content Include="Views\Spelers\Create.cshtml" />
     <Content Include="Views\Spelers\Delete.cshtml" />
     <Content Include="Views\Spelers\Edit.cshtml" />
     <Content Include="Views\Spelers\Index.cshtml" />
     <Content Include="Views\Sluiten\Index.cshtml" />
-    <Content Include="Views\Scholen\Create.cshtml" />
-    <Content Include="Views\Scholen\Delete.cshtml" />
-    <Content Include="Views\Scholen\Details.cshtml" />
     <Content Include="Views\Scholen\Edit.cshtml" />
     <Content Include="Views\Scholen\Index.cshtml" />
+    <Content Include="Views\Toernooioverzicht\Index.cshtml" />
+    <Content Include="Views\Indelen\Create.cshtml" />
+    <Content Include="Views\Indelen\Delete.cshtml" />
+    <Content Include="Views\Indelen\Details.cshtml" />
+    <Content Include="Views\Indelen\Edit.cshtml" />
+    <Content Include="Views\Indelen\Index.cshtml" />
+    <Content Include="Views\Importeren\Index.cshtml" />
+    <Content Include="Views\Uitslagen\Edit.cshtml" />
+    <Content Include="Views\Uitslagen\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Importeren\" />
     <Folder Include="Views\Message\" />
   </ItemGroup>
   <ItemGroup>

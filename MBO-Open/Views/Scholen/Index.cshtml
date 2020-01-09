@@ -8,42 +8,47 @@
 
 
 
-    <h1>Scholen</h1>
+<h1>Scholen</h1>
 
-    <div class="container" style="padding-top: 100px;">
-        <div class="card">
-            <div class="card-body">
-                <table class="table table-striped table-bordered responsive nowrap project-table" width="100%">
-                    <thead>
+@*Displays all Scholen*@
+<div class="container" style="padding-top: 100px;">
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-striped table-bordered responsive nowrap project-table" width="100%">
+                <thead>
+                    @*The text of the columns*@
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Naam)
+                        </th>
+                        <th>
+                            Wijzigen
+                        </th>
+                        <th>
+                            Verwijderen
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        @*All necesarry information per item/school*@
                         <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Naam)
-                            </th>
-                            <th>
-                                Wijzigen
-                            </th>
-                            <th>
-                                Verwijderen
-                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Naam)
+                            </td>
+                            <td>
+                                @*Every row gets an Edit button*@
+                                @Html.ActionLink("Wijzig", "Edit", new { id = item.ID })
+                            </td>
+                            <td>
+                                @*Every row gets an delete button*@
+                                @Html.ActionLink("Verwijder", "Delete", new { id = item.ID })
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Naam)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Wijzig", "Edit", new { id = item.ID })
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Verwijder", "Delete", new { id = item.ID })
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
+</div>

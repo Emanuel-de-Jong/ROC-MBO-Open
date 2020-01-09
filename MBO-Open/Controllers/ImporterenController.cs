@@ -12,22 +12,36 @@ using System.Xml;
 
 namespace MBO_Open.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ImporterenController : Controller
     {
         private MBOOpenEntities db = new MBOOpenEntities();
 
-        public ActionResult ManageFile(HttpPostedFileBase file, string prevURL)
+
+        public ActionResult Index()
         {
+            // Gives all Toernooien to the view so it put them in a select
+            ViewBag.Toernooien = new SelectList(db.Toernooiens, "ID", "Omschrijving");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ManageFile(HttpPostedFileBase file, Toernooien Toernooien)
+        {
+            // Checks if the file is a xml
             if (!file.FileName.ToLower().EndsWith(".xml"))
             {
+                // If it is not, we go back to the view
                 Session["message"] = "Het bestand is geen xml";
-                return Redirect(prevURL);
+                return RedirectToAction("Index");
             }
 
-            //ImportXml(file);
+            // Imports the content of the xml that isn't in the database yet, into the database
+            ImportXml(file);
 
             Session["message"] = "Het xml bestand is succesvol geimporteerd";
-            return Redirect(prevURL);
+            return RedirectToAction("Index");
         }
 
         private void ImportXml(HttpPostedFileBase xml)
@@ -35,22 +49,50 @@ namespace MBO_Open.Controllers
             XmlDocument spelers = new XmlDocument();
 
             spelers.Load(xml.InputStream);
+
+            // Gets the ID of the school in the file
+            Nullable<int> schoolId = db.FindScholenIDWithNaam(spelers.DocumentElement.ChildNodes[0]["schoolnaam"].InnerText).ToList()[0];
+            // If there is none (e.g. It does not exist yet)
+            if(schoolId == null)
+            {
+                // Creates a new school model
+                var newSchool = new Scholen();
+                // Fills it with the data in the file
+                newSchool.Naam = spelers.DocumentElement.ChildNodes[0]["schoolnaam"].InnerText;
+                // And pushes it to the database
+                db.Scholens.Add(newSchool);
+                db.SaveChanges();
+                schoolId = db.FindScholenIDWithNaam(spelers.DocumentElement.ChildNodes[0]["schoolnaam"].InnerText).ToList()[0];
+            }
+
+            // Goes through all the spelers
             foreach (XmlNode node in spelers.DocumentElement)
             {
-                Speler newSpeler = new Speler();
-
-                List<Int32> schoolIDsWithName = db.FindScholenIDWithNaam(node.ChildNodes[2].InnerText).Select(i => i.GetValueOrDefault(0)).ToList();
-                if (node.Name.ToLower() == "aanmelding")
+                // Gets the ID of the speler
+                Nullable<int> spelerID = db.FindSpelerIDWithNaam(node["spelervoornaam"].InnerText, node["spelerachternaam"].InnerText, node["spelertussenvoegsels"].InnerText).ToList()[0];
+                // If there is one, we don't need to add it
+                if (spelerID != null)
                 {
-                    newSpeler.Voornaam = node.ChildNodes[0].InnerText;
-                    newSpeler.Achternaam = node.ChildNodes[1].InnerText;
-                    newSpeler.SchoolID = schoolIDsWithName[0];
-                    newSpeler.Tussenvoegsels = node.ChildNodes[3].InnerText;
+                    // So we continue
+                    continue;
                 }
 
+                // Else, it makes a new speler model
+                Speler newSpeler = new Speler();
+
+                // Puts the content of the file in it
+                if (node.Name.ToLower() == "aanmelding")
+                {
+                    newSpeler.Voornaam = node["spelervoornaam"].InnerText;
+                    newSpeler.Achternaam = node["spelerachternaam"].InnerText;
+                    newSpeler.SchoolID = schoolId.GetValueOrDefault();
+                    newSpeler.Tussenvoegsels = node["spelertussenvoegsels"].InnerText;
+                }
+
+                // And saves it to the database
                 db.Spelers.Add(newSpeler);
-                db.SaveChanges();
             }
+            db.SaveChanges();
         }
     }
 }

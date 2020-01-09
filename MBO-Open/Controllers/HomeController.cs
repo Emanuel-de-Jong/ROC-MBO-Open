@@ -8,9 +8,8 @@ namespace MBO_Open.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index(string message = "")
+        public ActionResult Index()
         {
-            ViewBag.message = message;
             return View();
         }
 

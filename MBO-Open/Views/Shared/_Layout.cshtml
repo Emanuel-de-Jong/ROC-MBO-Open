@@ -50,12 +50,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="@Url.Action("Index", "Handmatig")">Handmatig</a>
-                                @using (Html.BeginForm("ManageFile", "Importeren", FormMethod.Post, new { enctype = "multipart/form-data", id = "importForm" }))
-                                {
-                                    <label class="dropdown-item" for="file" style="margin-bottom:0;">Importeren</label>
-                                    <input type="file" accept=".xml" hidden id="file" name="file" />
-                                    <input type="hidden" value='@Request.Url.AbsoluteUri' name="prevURL" />
-                                }
+                                <a class="dropdown-item" href="@Url.Action("Index", "Importeren")">Importeren</a>
                                 <a class="dropdown-item" href="@Url.Action("Index", "Sluiten")">Sluiten</a>
                             </div>
                         </li>
@@ -64,9 +59,9 @@
                                 Wedstrijden
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="@Url.Action("Index", "Toernooioverzicht")">Spelergegevens</a>
-                                <a class="dropdown-item" href="@Url.Action("Index", "Uitslagen")">Scholengegeven</a>
-                                <a class="dropdown-item" href="@Url.Action("Index", "Indelen")">Toernooien</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Toernooioverzicht")">Toernooioverzicht</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Uitslagen")">Uitslagen beheren</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Indelen")">Indelen volgende ronde</a>
                             </div>
                         </li>
                     }

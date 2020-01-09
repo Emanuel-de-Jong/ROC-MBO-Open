@@ -5,48 +5,53 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Spelergegevens</h2>
-
-<p>
+    <h1>Spelergegevens</h1>
     @Html.ActionLink("voeg nieuwe speler toe", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Voornaam)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tussenvoegsels)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Achternaam)
-        </th>
-        <th>
-            <h5>School</h5>
-        </th>
-        <th></th>
-    </tr>
+    <div class="containerS">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped table-bordered responsive nowrap project-table" width="100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Voornaam)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Tussenvoegsels)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Achternaam)
+                            </th>
+                            <th>
+                                <h5>School</h5>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Voornaam)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tussenvoegsels)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Achternaam)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Scholen.Naam)
+                                </td>
+                                @*<td>
+                                        @Html.ActionLink("Wijzig", "Edit", new { id = item.ID })
+                                        @Html.ActionLink("Verwijder", "Delete", new { id = item.ID })
+                                    </td>*@
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Voornaam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tussenvoegsels)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Achternaam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Scholen.Naam)
-            </td>
-            <td>
-                @Html.ActionLink("Aanpassen", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Verwijderen", "Delete", new { id = item.ID })
-            </td>
-        </tr>
-    }
-
-</table>

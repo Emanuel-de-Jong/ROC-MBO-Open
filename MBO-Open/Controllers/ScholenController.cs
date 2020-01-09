@@ -10,17 +10,18 @@ using MBO_Open.Models;
 
 namespace MBO_Open.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ScholenController : Controller
     {
         private MBOOpenEntities db = new MBOOpenEntities();
 
-        // GET: Scholen
         public ActionResult Index()
         {
+            // Gives all scholen to the view so it can display it
             return View(db.Scholens.ToList());
         }
 
-        // GET: Scholen/Edit/5
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -35,23 +36,27 @@ namespace MBO_Open.Controllers
             return View(scholen);
         }
 
-        // POST: Scholen/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
+        // The parameter is the selected school with some variables edited by the user
         public ActionResult Edit([Bind(Include = "ID,Naam")] Scholen scholen)
         {
             if (ModelState.IsValid)
             {
+                // Pushes the edited data to the database
                 db.Entry(scholen).State = EntityState.Modified;
                 db.SaveChanges();
+                Session["message"] = "School succesvol bijgewerkt";
                 return RedirectToAction("Index");
             }
+
+            // The modelstate is not valid so we go back to the view
+            Session["message"] = "Bewerken mislukt";
             return View(scholen);
         }
 
-        // GET: Scholen/Delete/5
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -64,14 +69,17 @@ namespace MBO_Open.Controllers
                 return HttpNotFound();
             }
 
+            // If the school doesn't have spelers
             if(scholen.Spelers.Count == 0)
             {
+                // It is allowed to be deleted
                 db.Scholens.Remove(scholen);
                 db.SaveChanges();
                 Session["message"] = "De school is succesvol verwijdert.";
             }
             else
             {
+                // Else, we go back to the view
                 Session["message"] = "De school heeft spelers dus kan niet verwijdert worden.";
             }
 

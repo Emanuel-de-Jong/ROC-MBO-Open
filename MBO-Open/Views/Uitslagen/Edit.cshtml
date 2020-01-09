@@ -1,0 +1,59 @@
+﻿@model MBO_Open.Models.Wedstrijden
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Bijwerken</h2>
+
+@*A form for editing the selected wedstrijd/uitslag*@
+@using (Html.BeginForm())
+{
+    @*Anti forgery security*@
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Wedstrijden</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*The ID is necesarry for the backend but set hidden so users can't see it*@
+        @Html.HiddenFor(model => model.ID)
+
+        @*The next few form groups are the inputs the user can use to edit the wedstrijd/uitslag*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.Score1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Score1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Score1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Score2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Score2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Score2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.WinnaarID, "WinnaarID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("WinnaarID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.WinnaarID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@*A link to go back to the uitslagen list*@
+<div>
+    @Html.ActionLink("Terug", "Index")
+</div>

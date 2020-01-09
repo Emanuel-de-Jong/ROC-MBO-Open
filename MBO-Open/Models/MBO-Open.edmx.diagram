@@ -4,16 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8d5f22d79d4747f89ffb6da1a383d604" Name="Diagram1">
+      <Diagram DiagramId="82f50b49b1a94aef95a61f86fa5c816c" Name="Diagram1">
         <EntityTypeShape EntityType="MBOOpenModel.Aanmeldingen" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MBOOpenModel.AspNetRole" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MBOOpenModel.AspNetUser" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MBOOpenModel.AspNetRole" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MBOOpenModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MBOOpenModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MBOOpenModel.AspNetUser" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="MBOOpenModel.Scholen" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="MBOOpenModel.Speler" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MBOOpenModel.sysdiagram" Width="1.5" PointX="7.75" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MBOOpenModel.Toernooien" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MBOOpenModel.Wedstrijden" Width="1.5" PointX="8.25" PointY="4.125" IsExpanded="true" />
         <AssociationConnector Association="MBOOpenModel.FK_Aanmeldingen_Spelers" ManuallyRouted="false" />
         <AssociationConnector Association="MBOOpenModel.FK_Aanmeldingen_Toernooien" ManuallyRouted="false" />
+        <AssociationConnector Association="MBOOpenModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="MBOOpenModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="MBOOpenModel.FK_Spelers_Scholen" ManuallyRouted="false" />
         <AssociationConnector Association="MBOOpenModel.FK_Wedstrijden_Spelers" ManuallyRouted="false" />
         <AssociationConnector Association="MBOOpenModel.FK_Wedstrijden_Spelers1" ManuallyRouted="false" />
