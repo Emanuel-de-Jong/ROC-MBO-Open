@@ -1,0 +1,33 @@
+﻿@model MBO_Open.Models.Wedstrijden
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Wedstrijden</h4>
+    <hr />
+    @if (ViewBag.HeeftWedstrijden != null)
+    {
+        <button class="btn col-lg-12" style="background-color:#ff9623;" disabled>Maak eerste ronde</button>
+    }
+    else
+    {
+        <button class="btn col-lg-12" style="background-color:#ff9623;" onclick="">Maak eerste ronde</button>
+
+    }
+    <hr />
+    @if (ViewBag.HeeftWedstrijden != null)
+    {
+        <button class="btn col-lg-12" style="background-color:#2a6797;color:white;">Maak volgende ronde</button>
+    }
+    else
+    {
+        <button class="btn col-lg-12" style="background-color:#2a6797;color:white;" disabled>Maak volgende ronde</button>
+    }
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

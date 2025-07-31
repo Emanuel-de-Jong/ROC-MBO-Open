@@ -5,19 +5,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Bijwerken</h2>
 
 
+@*A form for editing the selected school*@
 @using (Html.BeginForm())
 {
+    @*Anti forgery security*@
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Scholen</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*The ID is necesarry for the backend but set hidden so users can't see it*@
         @Html.HiddenFor(model => model.ID)
 
+        @*The user can edit the name of the school here*@
         <div class="form-group">
             @Html.LabelFor(model => model.Naam, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -34,10 +38,7 @@
     </div>
 }
 
+@*A link to go back to the scholen list*@
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Terug", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

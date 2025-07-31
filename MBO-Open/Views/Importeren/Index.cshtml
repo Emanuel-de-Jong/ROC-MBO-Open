@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/importeren.css" rel="stylesheet" />
+
+<h2>Importeren</h2>
+
+@*The form for selecting the file to with the spelers to register*@
+@using (Html.BeginForm("ManageFile", "Importeren", FormMethod.Post, new { enctype = "multipart/form-data", id = "importForm" }))
+{
+    @*Anti forgery security*@
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @*For styling reasons we use a label that links to the file input and hide the file input itself*@
+        <label for="file" class="form-control" id="choose-file">
+            Drag & Drop of klik hier om naar een bestand te zoeken
+        </label>
+        <input type="file" accept=".xml" id="file" name="file" hidden required />
+    </div>
+
+    @*A dropdown with the toernooien. All spelers will be registered to the tournooi selected*@
+    <div class="form-group">
+        <label for="Toernooien">Selecteer het toernooi</label>
+        @Html.DropDownList("Toernooien", null, htmlAttributes: new { @class = "form-control" })
+    </div>
+
+
+    <div class="form-group text-center">
+        <button type="submit" id="submit" class="btn-lg btn-primary">Importeer</button>
+    </div>
+}
+
+
+
+
+<script>
+    $(document).ready(function () {
+        @*Gets executed when the file is changed*@
+        $("#file").change(function () {
+            @*Changes the text in the file input label to either it not being the right type or it it's name*@
+            if ($("#file").val().slice(-3) != 'xml') {
+                $("#choose-file").text("Het bestand type is niet ondersteund");
+                return;
+            }
+
+            var file = $("#file").prop("files")[0];
+            $("#choose-file").text(file.name + " geselecteerd");
+        });
+
+        @*These events handle the drag & drop*@
+        $("#choose-file").on("dragover", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        });
+
+        $("#choose-file").on("dragenter", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            $("#choose-file").text("Drop je bestand hier");
+        });
+
+        $("#choose-file").on("dragleave", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            $("#choose-file").text("Drag & Drop of klik hier om naar een bestand te zoeken");
+        });
+
+        $("#choose-file").on("drop", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var files = event.originalEvent.dataTransfer.files;
+            $("#file").prop("files", files);
+            $("#file").trigger("change");
+        });
+    });
+</script>

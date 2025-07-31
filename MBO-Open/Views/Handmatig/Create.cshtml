@@ -1,0 +1,65 @@
+﻿@model MBO_Open.Models.HandmatigAanmelden
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Aanmeldingen</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <label for="toernooien.Omschrijving" class="control-label col-md-2">Toernooi</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Toernooien.Omschrijving, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Toernooien.Omschrijving, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="Scholen" class="control-label col-md-2">School</label>
+        <div class="col-md-10">
+            @Html.DropDownList("Scholen", null, htmlAttributes: new { @class = "form-control", })
+        </div>
+    </div>
+
+    @if (ViewBag.SpelersSelect == true)
+    {
+        <div class="form-group">
+            <label for="Spelers" class="control-label col-md-2">Spelers</label>
+            <div class="col-md-10">
+                @Html.DropDownList("Spelers", null, htmlAttributes: new { @class = "form-control", })
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @if (ViewBag.SpelersSelect == true)
+            {
+                <input type="submit" value="Create" class="btn btn-default" />
+            }
+            else
+            {
+                <input type="submit" value="Verder" class="btn btn-default" />
+            }
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

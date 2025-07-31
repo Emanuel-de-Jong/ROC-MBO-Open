@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MBO_Open.Models.Toernooien>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-striped table-bordered responsive nowrap project-table" width="100%">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Omschrijving)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Datum)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Omschrijving)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Datum.Date)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Rondes genereren", "Details", new { id = item.ID })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

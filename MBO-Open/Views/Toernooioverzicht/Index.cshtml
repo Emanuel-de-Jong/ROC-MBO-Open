@@ -1,0 +1,23 @@
+﻿@model IEnumerable<MBO_Open.Models.Wedstrijden>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<table>
+    @for (int i = 1; i < 4; i++)
+    {
+        <p>ronde @i</p>
+    <tr>
+        @foreach (var item in Model)
+        {
+            if (item.Ronde == i && item.ToernooiID == 5)
+            {
+                <td style="border-color:aquamarine; border-width:thick; border:solid;">@item.Speler.Voornaam - @item.Speler1.Voornaam</td>
+            }
+        }
+    </tr>
+       }
+</table>

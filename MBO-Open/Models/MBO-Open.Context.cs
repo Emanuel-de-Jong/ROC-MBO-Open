@@ -29,9 +29,12 @@ namespace MBO_Open.Models
     
         public virtual DbSet<Aanmeldingen> Aanmeldingens { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Scholen> Scholens { get; set; }
         public virtual DbSet<Speler> Spelers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Toernooien> Toernooiens { get; set; }
         public virtual DbSet<Wedstrijden> Wedstrijdens { get; set; }
     
@@ -136,6 +139,32 @@ namespace MBO_Open.Models
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<Nullable<int>> FindScholenIDWithNaam(string naam)
+        {
+            var naamParameter = naam != null ?
+                new ObjectParameter("Naam", naam) :
+                new ObjectParameter("Naam", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("FindScholenIDWithNaam", naamParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> FindSpelerIDWithNaam(string voornaam, string achternaam, string tussenvoegsels)
+        {
+            var voornaamParameter = voornaam != null ?
+                new ObjectParameter("Voornaam", voornaam) :
+                new ObjectParameter("Voornaam", typeof(string));
+    
+            var achternaamParameter = achternaam != null ?
+                new ObjectParameter("Achternaam", achternaam) :
+                new ObjectParameter("Achternaam", typeof(string));
+    
+            var tussenvoegselsParameter = tussenvoegsels != null ?
+                new ObjectParameter("Tussenvoegsels", tussenvoegsels) :
+                new ObjectParameter("Tussenvoegsels", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("FindSpelerIDWithNaam", voornaamParameter, achternaamParameter, tussenvoegselsParameter);
         }
     }
 }
